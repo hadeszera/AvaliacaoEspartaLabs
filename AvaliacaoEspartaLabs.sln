@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaliacaoEspartaLabs", "AvaliacaoEspartaLabs\AvaliacaoEspartaLabs.csproj", "{D636A91D-279B-42FB-B0B2-0A626E1B60CD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaliacaoEspartaLabs.Domain", "Domain\AvaliacaoEspartaLabs.Domain\AvaliacaoEspartaLabs.Domain.csproj", "{A8007D99-6657-464A-A580-D1C1AD313DAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaliacaoEspartaLabs.Service", "Service\AvaliacaoEspartaLabs.Service\AvaliacaoEspartaLabs.Service.csproj", "{0E7F3EFC-2214-4EA8-8460-3CBB59741D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaliacaoEspartaLabs.Service", "Service\AvaliacaoEspartaLabs.Service\AvaliacaoEspartaLabs.Service.csproj", "{0E7F3EFC-2214-4EA8-8460-3CBB59741D24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaliacaoEspartaLabs.Infra", "Infra\AvaliacaoEspartaLabs.Infra\AvaliacaoEspartaLabs.Infra.csproj", "{489FFED1-4682-412B-B38D-986F108FAC9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaliacaoEspartaLabs.Infra", "Infra\AvaliacaoEspartaLabs.Infra\AvaliacaoEspartaLabs.Infra.csproj", "{489FFED1-4682-412B-B38D-986F108FAC9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaliacaoEspartaLabs.Application", "..\Application\AvaliacaoEspartaLabs.Application\AvaliacaoEspartaLabs.Application.csproj", "{E2BB9B40-02C8-41DE-8AAD-3ED04C505E45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaliacaoEspartaLabs.API", "AvaliacaoEspartaLabs.API\AvaliacaoEspartaLabs.API.csproj", "{3ED87ADC-E982-43E8-B339-86BC459FB4D7}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9701B450-9F10-4007-924C-1D4B9E3441E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D636A91D-279B-42FB-B0B2-0A626E1B60CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D636A91D-279B-42FB-B0B2-0A626E1B60CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D636A91D-279B-42FB-B0B2-0A626E1B60CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D636A91D-279B-42FB-B0B2-0A626E1B60CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A8007D99-6657-464A-A580-D1C1AD313DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A8007D99-6657-464A-A580-D1C1AD313DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8007D99-6657-464A-A580-D1C1AD313DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +33,18 @@ Global
 		{489FFED1-4682-412B-B38D-986F108FAC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{489FFED1-4682-412B-B38D-986F108FAC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{489FFED1-4682-412B-B38D-986F108FAC9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2BB9B40-02C8-41DE-8AAD-3ED04C505E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BB9B40-02C8-41DE-8AAD-3ED04C505E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BB9B40-02C8-41DE-8AAD-3ED04C505E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BB9B40-02C8-41DE-8AAD-3ED04C505E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ED87ADC-E982-43E8-B339-86BC459FB4D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED87ADC-E982-43E8-B339-86BC459FB4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED87ADC-E982-43E8-B339-86BC459FB4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED87ADC-E982-43E8-B339-86BC459FB4D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9701B450-9F10-4007-924C-1D4B9E3441E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9701B450-9F10-4007-924C-1D4B9E3441E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9701B450-9F10-4007-924C-1D4B9E3441E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9701B450-9F10-4007-924C-1D4B9E3441E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

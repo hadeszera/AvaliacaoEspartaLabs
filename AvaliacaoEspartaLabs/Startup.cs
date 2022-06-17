@@ -1,4 +1,9 @@
+using AvaliacaoEspartaLabs.Application.Application;
+using AvaliacaoEspartaLabs.Application.IApplicationService;
+using AvaliacaoEspartaLabs.Domain.Repositorios;
 using AvaliacaoEspartaLabs.Infra;
+using AvaliacaoEspartaLabs.Service;
+using AvaliacaoEspartaLabs.Service.IService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +37,10 @@ namespace AvaliacaoEspartaLabs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IOficinaService, OficinaService>();
+            services.AddScoped<IOficinaRepositorio, OficinaRepositorio>();
+            services.AddScoped<IOficinaApplication, OficinaApplication>();
+
             services.AddDbContext<AppDbContext>(option => { option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")); });
             //services.AddAuthentication();
 

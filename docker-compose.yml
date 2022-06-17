@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  avaliacaoespartalabs.api:
+    image: ${DOCKER_REGISTRY-}avaliacaoespartalabsapi
+    build:
+      context: .
+      dockerfile: AvaliacaoEspartaLabs.API/Dockerfile
+    depends_on:
+    - sqlserver
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    hostname: 'sqlserver'
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: "AvaliacaoEspartaLabs@teste"
+      DBServer: "mssql-server"
+      DbPort: "1433"
+      DBUser: "SA"
+      Password: "AvaliacaoEspartaLabs@teste"
+      Database: AvaliacaoEspartaLabs
+    volumes:
+      - c:\dados\volumes\mssql:/var/opt/mssql3
+    ports:
+      - '11433:1433'    
+    expose:
+      - 1433

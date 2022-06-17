@@ -1,5 +1,6 @@
 ﻿using AvaliacaoEspartaLabs.Domain.Entities;
 using AvaliacaoEspartaLabs.Domain.Repositorios;
+using AvaliacaoEspartaLabs.Infra;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AvaliacaoEspartaLabs.Infra
 {
-    internal class OficinaRepositorio : IOficinaRepositorio
+    public class OficinaRepositorio : IOficinaRepositorio
     {
         private readonly AppDbContext _context;
         public OficinaRepositorio(AppDbContext context)
@@ -22,19 +23,18 @@ namespace AvaliacaoEspartaLabs.Infra
             _context.SaveChanges();
         }
 
-        public Task<Oficina> AutenticarOficina(string senha, string Cnpj)
+        public async Task<Oficina> AutenticarOficina(string Cnpj, string Senha)
         {
             try
             {
-                var oficina = _context.Oficinas.FirstOrDefaultAsync(O => O.CNPJ == Cnpj && O.Senha == O.Senha);
+                var oficina = await _context.Oficinas.FirstOrDefaultAsync(O => O.CNPJ == Cnpj && O.Senha == Senha);
                 if (oficina == null)
-                    throw new Exception("Oficina não encontrada");
+                    throw new Exception("Usuário ou senha Incorreto");
                 return oficina;
             }
             catch (Exception ex)
             {
-
-                throw ex.InnerException;
+                throw ex;
             }
         }
 
@@ -44,7 +44,7 @@ namespace AvaliacaoEspartaLabs.Infra
             {
                 var oficinaDb = _context.Oficinas.FirstOrDefault(O=>O.CNPJ == oficina.CNPJ);
                 if (oficinaDb != null)
-                    throw new Exception("Oficina já existe no banco");
+                    throw new Exception($"Oficina {oficina.Nome} com o Cnpj {oficina.CNPJ} já existe no banco");
 
                 _context.Add(oficina);
                 _context.SaveChanges();
