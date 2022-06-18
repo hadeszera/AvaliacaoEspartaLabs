@@ -16,7 +16,9 @@ namespace AvaliacaoEspartaLabs.API.JWT
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Nome.ToString())
+                    new Claim(ClaimTypes.Name, user.Nome.ToString()),
+                    new Claim("CNPJ", user.CNPJ.ToString()),
+                    new Claim("IdOficina", user.IdOficina.ToString()),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

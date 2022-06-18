@@ -16,5 +16,7 @@ namespace AvaliacaoEspartaLabs.Service.IService
         public void AtualizarOficina(Oficina oficina);
 
         public Task<Oficina> AutenticarOficina(string senha, string Cnpj);
+
+        public Task AdicionarAgendamento(AddAgendamento agendamento); 
     }
 }

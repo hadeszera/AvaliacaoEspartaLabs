@@ -79,10 +79,7 @@ namespace AvaliacaoEspartaLabs
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AvaliacaoEspartaLabs", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description =
-                       "JWT Authorization Header - utilizado com Bearer Authentication.\r\n\r\n" +
-                       "Digite 'Bearer' [espaço] e então seu token no campo abaixo.\r\n\r\n" +
-                       "Exemplo (informar sem as aspas): 'Bearer 12345abcdef'",
+                    Description = "Exemplo (informar sem aspas): 'Bearer 12345abcdef'",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,

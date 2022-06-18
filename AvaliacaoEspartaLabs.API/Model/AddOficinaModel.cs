@@ -7,5 +7,7 @@
         public string CNPJ { get; set; }
 
         public string Senha { get; set; }
+
+        public int CargaTrabalhoOficina { get; set; }
     }
 }

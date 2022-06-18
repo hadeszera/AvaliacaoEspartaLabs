@@ -38,6 +38,23 @@ namespace AvaliacaoEspartaLabs.Infra
             }
         }
 
+        public async Task<Oficina> BuscarOficinaPorId(int idOficina)
+        {
+            try
+            {
+                var oficina = await _context.Oficinas.Include(x=>x.Agendas).ThenInclude(x=>x.CargasTrabalho).FirstOrDefaultAsync(x=>x.Id == idOficina);
+                if (oficina == null)
+                    throw new Exception("Erro ao buscar a Oficina");
+
+                return oficina;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         public void CriarOficina(Oficina oficina)
         {
             try

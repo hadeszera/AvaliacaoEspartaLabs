@@ -16,7 +16,9 @@ namespace AvaliacaoEspartaLabs.Domain.Entities
         [Column]
         public string CNPJ { get; set; }
 
-        public IEnumerable<Agenda> Agendas { get; set; }
+        public ICollection<Agenda> Agendas { get; set; }
         public string Senha { get; set; }
+
+        public int CargaTrabalhoMaxima { get; set; }
     }
 }

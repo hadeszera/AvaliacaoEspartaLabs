@@ -10,7 +10,6 @@ namespace AvaliacaoEspartaLabs.Domain.Entities
 {
     public class CargaTrabalho : Base
     {
-        public int MyProperty { get; set; }
         public Servico Servico { get; set; }
 
         public int UnidadeTrabalho { get; set; }

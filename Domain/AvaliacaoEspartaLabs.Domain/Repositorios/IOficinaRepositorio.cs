@@ -16,5 +16,6 @@ namespace AvaliacaoEspartaLabs.Domain.Repositorios
         public void AtualizarOficina(Oficina oficina);
 
         public Task<Oficina> AutenticarOficina(string senha, string Cnpj);
+        public Task<Oficina> BuscarOficinaPorId(int idOficina);
     }
 }

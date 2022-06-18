@@ -16,6 +16,63 @@ namespace AvaliacaoEspartaLabs.Service.Service
         {
             _oficinaRepositorio = oficinaRepositorio;
         }
+
+        public async Task AdicionarAgendamento(AddAgendamento agendamento)
+        {
+            var oficina = await _oficinaRepositorio.BuscarOficinaPorId(agendamento.IdOficina);
+
+            if (oficina.Agendas.Any())
+            {
+                var agenda = oficina.Agendas.FirstOrDefault(x => x.DataServico.Date == agendamento.DataAgendamento.Date);
+                if (agenda != null)
+                {
+                    await AddComAgendamentoPrevio(agenda, agendamento, oficina);
+                }
+                else
+                {
+                    await AddSemAgendamentoPrevio(agendamento, oficina);
+                }
+            }
+            else
+            {
+                await AddSemAgendamentoPrevio(agendamento, oficina);
+            }
+        }
+
+        public async Task AddComAgendamentoPrevio(Agenda agenda, AddAgendamento agendamento, Oficina oficina)
+        {
+            agenda.DataServico = agendamento.DataAgendamento;
+            agenda.IdOficina = agendamento.IdOficina;
+            agenda.VerificaSePodeAgendar(agendamento.DataAgendamento);
+           
+            var cargaTrabalho = new CargaTrabalho();
+            cargaTrabalho.UnidadeTrabalho = agenda.RetornarCargaServico(agendamento.Servico);
+            cargaTrabalho.Servico = agendamento.Servico;
+            foreach (var agendaOficina in oficina.Agendas) {
+                if (agenda.Id == agendaOficina.Id)
+                    agendaOficina.CargasTrabalho.Add(cargaTrabalho);
+                    agendaOficina.PermiteAdicionarCargaTrabalhoAgenda(oficina.CargaTrabalhoMaxima);
+            }
+
+            _oficinaRepositorio.AtualizarOficina(oficina);
+        }
+
+
+        public async Task AddSemAgendamentoPrevio(AddAgendamento agendamento, Oficina oficina)
+        {
+            var agenda = new Agenda();
+            agenda.DataServico = agendamento.DataAgendamento;
+            agenda.IdOficina = agendamento.IdOficina;
+            agenda.VerificaSePodeAgendar(agendamento.DataAgendamento);
+            var cargaTrabalho = new CargaTrabalho();
+            cargaTrabalho.UnidadeTrabalho = agenda.RetornarCargaServico(agendamento.Servico);
+            cargaTrabalho.Servico = agendamento.Servico;
+            agenda.CargasTrabalho.Add(cargaTrabalho);
+            agenda.PermiteAdicionarCargaTrabalhoAgenda(oficina.CargaTrabalhoMaxima);
+            oficina.Agendas.Add(agenda);
+            AtualizarOficina(oficina);
+        }
+
         public void AtualizarOficina(Oficina oficina)
         {
             try
