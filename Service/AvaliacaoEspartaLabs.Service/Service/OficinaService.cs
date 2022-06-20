@@ -1,6 +1,7 @@
 ﻿using AvaliacaoEspartaLabs.Domain.Entities;
 using AvaliacaoEspartaLabs.Domain.Repositorios;
 using AvaliacaoEspartaLabs.Service.IService;
+using FluentDateTime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,17 +113,37 @@ namespace AvaliacaoEspartaLabs.Service.Service
             }
         }
 
-        public void ExcluirOficina(int IdOficina)
+        public async Task<ICollection<Agenda>> BuscarAgendaProximosDias(int idOficina)
+        {
+            var DataAgendamentoProximosDias = DateTime.Now.AddBusinessDays(5);
+            return await _oficinaRepositorio.BuscarProximosAgendamentos(DataAgendamentoProximosDias,idOficina);
+        }
+
+        public async Task<Agenda> BuscarAgendamentoDia(int idOficina)
         {
             try
             {
-                _oficinaRepositorio.ExcluirOficina(IdOficina);
+                return await _oficinaRepositorio.BuscarAgendamentoDia(idOficina);
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+        }
+        public async Task<Agenda> BuscarAgendamentoDiaEspecifico(int idOficina,DateTime data)
+        {
+            try
+            {
+                return await _oficinaRepositorio.BuscarAgendamentoDiaEspecifico(idOficina, data);
             }
             catch (Exception e)
             {
 
                 throw e;
             }
+        
         }
+
     }
 }

@@ -11,12 +11,15 @@ namespace AvaliacaoEspartaLabs.Service.IService
     {
         public void CriarOficina(Oficina oficina);
 
-        public void ExcluirOficina(int IdOficina);
-
         public void AtualizarOficina(Oficina oficina);
 
         public Task<Oficina> AutenticarOficina(string senha, string Cnpj);
 
-        public Task AdicionarAgendamento(AddAgendamento agendamento); 
+        public Task AdicionarAgendamento(AddAgendamento agendamento);
+        public Task<ICollection<Agenda>> BuscarAgendaProximosDias(int idOficina);
+        public Task<Agenda> BuscarAgendamentoDia(int idOficina);
+
+        public Task<Agenda> BuscarAgendamentoDiaEspecifico(int idOficina, DateTime data);
+
     }
 }

@@ -17,5 +17,9 @@ namespace AvaliacaoEspartaLabs.Domain.Repositorios
 
         public Task<Oficina> AutenticarOficina(string senha, string Cnpj);
         public Task<Oficina> BuscarOficinaPorId(int idOficina);
+        public Task<List<Agenda>> BuscarProximosAgendamentos(DateTime dataAgendamentoProximosDias, int idOficina);
+        public Task<Agenda> BuscarAgendamentoDia(int idOficina);
+
+        public Task<Agenda> BuscarAgendamentoDiaEspecifico(int idOficina,DateTime data);
     }
 }

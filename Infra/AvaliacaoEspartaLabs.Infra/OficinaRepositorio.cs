@@ -38,6 +38,16 @@ namespace AvaliacaoEspartaLabs.Infra
             }
         }
 
+        public async Task<Agenda> BuscarAgendamentoDia(int idOficina)
+        {
+            return await _context.Agendas.Include(x => x.CargasTrabalho).FirstOrDefaultAsync(x => x.IdOficina == idOficina && x.DataServico.Date == DateTime.Now.Date);
+        }
+
+        public async Task<Agenda> BuscarAgendamentoDiaEspecifico(int idOficina, DateTime data)
+        {
+             return await _context.Agendas.Include(x => x.CargasTrabalho).FirstOrDefaultAsync(x => x.IdOficina == idOficina && x.DataServico.Date == data);
+        }
+
         public async Task<Oficina> BuscarOficinaPorId(int idOficina)
         {
             try
@@ -53,6 +63,16 @@ namespace AvaliacaoEspartaLabs.Infra
 
                 throw e;
             }
+        }
+
+        public async Task<List<Agenda>> BuscarProximosAgendamentos(DateTime dataAgendamentoProximosDias, int idOficina)
+        {
+            var result = await _context.Agendas.Include(x=>x.CargasTrabalho).
+                Where(x => x.IdOficina == idOficina 
+                && x.DataServico.Date > DateTime.Now.Date 
+                && x.DataServico <= dataAgendamentoProximosDias.Date).
+                ToListAsync();
+            return result;
         }
 
         public void CriarOficina(Oficina oficina)

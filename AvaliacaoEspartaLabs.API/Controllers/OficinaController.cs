@@ -4,6 +4,7 @@ using AvaliacaoEspartaLabs.Application.IApplicationService;
 using AvaliacaoEspartaLabs.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,6 +75,47 @@ namespace AvaliacaoEspartaLabs.Controllers
             {
 
                 return StatusCode(400,e.Message);
+            }
+        }
+        [HttpGet("BuscarAgendaDia")]
+        public async Task<IActionResult> BuscarAgendamentoDiaAtual()
+        {
+            try
+            {
+                
+                return StatusCode(201, await _applicationService.BuscarAgendamentoDiaAtual(1));
+            }
+            catch (System.Exception e)
+            {
+
+                return StatusCode(400, e.Message);
+            }
+        }
+
+        [HttpGet("BuscarAgendaProximosDias")]
+        public async Task<IActionResult> BuscarAgendaProximosDias()
+        {
+            try
+            {
+                return StatusCode(201, await _applicationService.BuscarAgendaProximosDias(1));
+            }
+            catch (System.Exception e)
+            {
+
+                return StatusCode(400, e.Message);
+            }
+        }
+        [HttpGet("BuscarAgendaDiaEspecifico")]
+        public async Task<IActionResult> BuscarAgendaProximosDias(DateTime data)
+        {
+            try
+            {
+                return StatusCode(201, await _applicationService.BuscarAgendaProximosDias(1));
+            }
+            catch (System.Exception e)
+            {
+
+                return StatusCode(400, e.Message);
             }
         }
 
