@@ -59,6 +59,7 @@ namespace AvaliacaoEspartaLabs.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("AdicionarAgendamentoOficina")]
         public async Task<IActionResult> AdicionarAgendamento([FromBody] AddAgendamento agendamento) {
             try
@@ -67,7 +68,7 @@ namespace AvaliacaoEspartaLabs.Controllers
                 {
                     Servico = agendamento.Servico,
                     DataAgendamento = agendamento.DataAgendamento,
-                    IdOficina =  1/*BuscarIdOficinaAutenticada().GetValueOrDefault()*/
+                    IdOficina = BuscarIdOficinaAutenticada().Value
                 });
                 return StatusCode(201);
             }
@@ -77,13 +78,14 @@ namespace AvaliacaoEspartaLabs.Controllers
                 return StatusCode(400,e.Message);
             }
         }
+        [Authorize]
         [HttpGet("BuscarAgendaDia")]
         public async Task<IActionResult> BuscarAgendamentoDiaAtual()
         {
             try
             {
                 
-                return StatusCode(201, await _applicationService.BuscarAgendamentoDiaAtual(1));
+                return StatusCode(201, await _applicationService.BuscarAgendamentoDiaAtual(BuscarIdOficinaAutenticada().Value));
             }
             catch (System.Exception e)
             {
@@ -91,13 +93,13 @@ namespace AvaliacaoEspartaLabs.Controllers
                 return StatusCode(400, e.Message);
             }
         }
-
+        [Authorize]
         [HttpGet("BuscarAgendaProximosDias")]
         public async Task<IActionResult> BuscarAgendaProximosDias()
         {
             try
             {
-                return StatusCode(201, await _applicationService.BuscarAgendaProximosDias(1));
+                return StatusCode(201, await _applicationService.BuscarAgendaProximosDias(BuscarIdOficinaAutenticada().Value));
             }
             catch (System.Exception e)
             {
@@ -105,12 +107,13 @@ namespace AvaliacaoEspartaLabs.Controllers
                 return StatusCode(400, e.Message);
             }
         }
+        [Authorize]
         [HttpGet("BuscarAgendaDiaEspecifico")]
         public async Task<IActionResult> BuscarAgendaProximosDias(DateTime data)
         {
             try
             {
-                return StatusCode(201, await _applicationService.BuscarAgendaProximosDias(1));
+                return StatusCode(201, await _applicationService.BuscarAgendaProximosDias(BuscarIdOficinaAutenticada().Value));
             }
             catch (System.Exception e)
             {
